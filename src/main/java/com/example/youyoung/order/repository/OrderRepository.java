@@ -19,4 +19,8 @@ public class OrderRepository {
     public Page<Order> getOrders(Long userId, Pageable pageable){
         return orderJpaRepository.findAllByUserId(userId, pageable);
     }
+
+    public Order getOrder(Long orderId, Long userId){
+        return orderJpaRepository.getOrder(orderId, userId);
+    }
 }

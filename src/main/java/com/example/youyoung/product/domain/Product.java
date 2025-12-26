@@ -30,4 +30,8 @@ public class Product extends BaseTimeEntity {
     public void deductQuantity(){
         this.quantity -= 1;
     }
+
+    public void increaseQuantity(){
+        this.quantity += 1;
+    }
 }

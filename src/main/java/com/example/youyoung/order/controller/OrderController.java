@@ -21,16 +21,24 @@ public class OrderController {
 
     @Operation(summary = "주문 생성", description = "주문 생성 API")
     @PostMapping
-    public ResponseEntity<ApiResponse<?>> getProducts(CreateOrderRequest request){
+    public ResponseEntity<ApiResponse<?>> createOrder(CreateOrderRequest request){
         orderService.createOrder(request);
         return ResponseEntity.ok(ApiResponse.success("주문 생성 성공",null));
     }
 
     @Operation(summary = "주문 내역 조회", description = "주문 내역 조회 API (페이징 처리)")
     @GetMapping
-    public ResponseEntity<ApiResponse<OrderListResponse>> getProducts(@RequestBody UserInfoRequest request,
+    public ResponseEntity<ApiResponse<OrderListResponse>> getOrders(@RequestBody UserInfoRequest request,
                                                                       @RequestParam(name = "page", required = false) Integer page){
         OrderListResponse orders = orderService.getOrders(request, page);
         return ResponseEntity.ok(ApiResponse.success("주문 내역 조회 성공", orders));
+    }
+
+    @Operation(summary = "주문 취소", description = "주문 취소 API")
+    @PatchMapping("/{orderId}")
+    public ResponseEntity<ApiResponse<?>> cancelOrder(@RequestBody UserInfoRequest request,
+                                                      @PathVariable("orderId") Long orderId){
+        orderService.cancelOrder(request, orderId);
+        return ResponseEntity.ok(ApiResponse.success("주문 취소 성공", null));
     }
 }

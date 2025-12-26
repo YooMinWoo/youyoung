@@ -50,4 +50,10 @@ public class OrderService {
         Page<Order> orders = orderRepository.getOrders(request.userId(), pageable);
         return OrderListResponseMapper.from(orders);
     }
+
+    @Transactional
+    public void cancelOrder(UserInfoRequest request, Long orderId) {
+        Order order = orderRepository.getOrder(orderId, request.userId());
+        order.cancel();
+    }
 }

@@ -1,5 +1,7 @@
 package com.example.youyoung.product.repository;
 
+import com.example.youyoung.global.exception.ApplicationException;
+import com.example.youyoung.global.exception.code.ProductErrorCode;
 import com.example.youyoung.product.domain.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,8 @@ public class ProductRepository {
     }
 
     public Product findById(Long productId) {
-        return productJpaRepository.findById(productId).orElseThrow();
+
+        return productJpaRepository.findById(productId)
+                .orElseThrow(() -> new ApplicationException(ProductErrorCode.PRODUCT_NOT_FOUND));
     }
 }

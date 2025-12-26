@@ -15,4 +15,12 @@ public interface OrderJpaRepository extends JpaRepository<Order, Long> {
             WHERE o.user.id = :userId
             """)
     Page<Order> findAllByUserId(@Param("userId") Long userId, Pageable pageable);
+
+    @Query("""
+            SELECT o FROM Order o
+            JOIN FETCH o.product p
+            WHERE o.id = :orderId
+            AND o.user.id = :userId
+            """)
+    Order getOrder(@Param("orderId") Long orderId, @Param("userId") Long userId);
 }

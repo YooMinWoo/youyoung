@@ -31,13 +31,19 @@ public class Order extends BaseTimeEntity {
     private User user;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private OrderStatus orderStatus;
 
     public static Order create(Product product, User user){
-        return Order.builder()
+        return com.example.youyoung.order.domain.Order.builder()
                 .product(product)
                 .user(user)
                 .orderStatus(OrderStatus.COMPLETED)
                 .build();
+    }
+
+    public void cancel(){
+        orderStatus = OrderStatus.CANCEL;
+        product.increaseQuantity();
     }
 }

@@ -1,6 +1,7 @@
 package com.example.youyoung.order.service;
 
 import com.example.youyoung.order.domain.Order;
+import com.example.youyoung.order.domain.OrderStatus;
 import com.example.youyoung.order.dto.CreateOrderRequest;
 import com.example.youyoung.order.repository.OrderRepository;
 import com.example.youyoung.product.domain.Product;
