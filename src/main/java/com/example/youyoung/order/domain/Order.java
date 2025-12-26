@@ -30,10 +30,14 @@ public class Order extends BaseTimeEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
+
     public static Order create(Product product, User user){
         return Order.builder()
                 .product(product)
                 .user(user)
+                .orderStatus(OrderStatus.COMPLETED)
                 .build();
     }
 }

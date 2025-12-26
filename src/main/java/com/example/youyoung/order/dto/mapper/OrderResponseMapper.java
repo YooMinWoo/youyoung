@@ -16,6 +16,7 @@ public class OrderResponseMapper {
                         .id(order.getId())
                         .productId(order.getProduct().getId())
                         .productName(order.getProduct().getName())
+                        .orderStatus(order.getOrderStatus())
                         .orderDate(order.getCreatedTime())
                         .build()
                 )
