@@ -2,6 +2,8 @@ package com.example.youyoung.order.controller;
 
 import com.example.youyoung.global.ApiResponse;
 import com.example.youyoung.order.dto.CreateOrderRequest;
+import com.example.youyoung.order.dto.OrderListResponse;
+import com.example.youyoung.order.dto.UserInfoRequest;
 import com.example.youyoung.order.service.OrderService;
 import com.example.youyoung.product.dto.ProductListResponse;
 import com.example.youyoung.product.service.ProductService;
@@ -22,5 +24,13 @@ public class OrderController {
     public ResponseEntity<ApiResponse<?>> getProducts(CreateOrderRequest request){
         orderService.createOrder(request);
         return ResponseEntity.ok(ApiResponse.success("주문 생성 성공",null));
+    }
+
+    @Operation(summary = "주문 내역 조회", description = "주문 내역 조회 API (페이징 처리)")
+    @GetMapping
+    public ResponseEntity<ApiResponse<OrderListResponse>> getProducts(@RequestBody UserInfoRequest request,
+                                                                      @RequestParam(name = "page", required = false) Integer page){
+        OrderListResponse orders = orderService.getOrders(request, page);
+        return ResponseEntity.ok(ApiResponse.success("주문 내역 조회 성공", orders));
     }
 }
