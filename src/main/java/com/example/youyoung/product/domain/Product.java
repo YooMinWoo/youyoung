@@ -26,4 +26,8 @@ public class Product extends BaseTimeEntity {
 
     @Column(nullable = false)
     private int quantity;
+
+    public void deductQuantity(){
+        this.quantity -= 1;
+    }
 }

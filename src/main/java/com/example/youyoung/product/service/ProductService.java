@@ -26,4 +26,8 @@ public class ProductService {
         Page<Product> products = productRepository.getProducts(pageable);
         return ProductListResponseMapper.from(products);
     }
+
+    public Product getProduct(Long productId){
+        return productRepository.findById(productId);
+    }
 }

@@ -15,4 +15,8 @@ public class ProductRepository {
     public Page<Product> getProducts(Pageable pageable){
         return productJpaRepository.findAll(pageable);
     }
+
+    public Product findById(Long productId) {
+        return productJpaRepository.findById(productId).orElseThrow();
+    }
 }
