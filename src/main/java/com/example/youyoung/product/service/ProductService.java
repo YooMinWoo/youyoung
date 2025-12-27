@@ -30,4 +30,12 @@ public class ProductService {
     public Product getProduct(Long productId){
         return productRepository.findById(productId);
     }
+
+    public Product findByIdWithPessimisticLock(Long productId){
+        return productRepository.findByIdWithPessimisticLock(productId);
+    }
+
+    public void decreaseQuantity(Long productId) {
+        productRepository.decreaseQuantity(productId);
+    }
 }

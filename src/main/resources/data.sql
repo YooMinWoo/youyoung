@@ -2,7 +2,7 @@ INSERT INTO users (id, name, created_time, modified_time) VALUES
 (1, 'test_1', now(), now());
 
 INSERT INTO product (id, name, price, quantity, created_time, modified_time) VALUES
-(1, 'product1',  (FLOOR(RAND() * 10) + 1) * 5000, FLOOR(RAND() * 100) + 1, NOW(), NOW()),
+(1, 'product1',  (FLOOR(RAND() * 10) + 1) * 5000, 1, NOW(), NOW()),
 (2, 'product2',  (FLOOR(RAND() * 10) + 1) * 5000, FLOOR(RAND() * 100) + 1, NOW(), NOW()),
 (3, 'product3',  (FLOOR(RAND() * 10) + 1) * 5000, FLOOR(RAND() * 100) + 1, NOW(), NOW()),
 (4, 'product4',  (FLOOR(RAND() * 10) + 1) * 5000, FLOOR(RAND() * 100) + 1, NOW(), NOW()),

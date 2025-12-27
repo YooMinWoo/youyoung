@@ -1,9 +1,13 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/youyoung?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: root
-    password: localhost
+    driver-class-name: org.h2.Driver
+    url: 'jdbc:h2:mem:youyoung'   # H2 DB 연결 주소 (In-Memory Mode)
+    username: sa
+
+  h2:
+    console: # H2 DB를 웹에서 관리할 수 있는 기능
+      enabled: true           # H2 Console 사용 여부
+      path: /h2-console       # H2 Console 접속 주소
 
   jpa:
     defer-datasource-initialization: true

@@ -22,7 +22,7 @@ public class OrderController {
     @Operation(summary = "주문 생성", description = "주문 생성 API")
     @PostMapping
     public ResponseEntity<ApiResponse<?>> createOrder(CreateOrderRequest request){
-        orderService.createOrder(request);
+        orderService.createOrderWithLock(request);
         return ResponseEntity.ok(ApiResponse.success("주문 생성 성공",null));
     }
 

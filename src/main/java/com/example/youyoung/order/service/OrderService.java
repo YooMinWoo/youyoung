@@ -34,8 +34,24 @@ public class OrderService {
         User userProxy = userService.getUserProxy(request.userId());
         Product product = productService.getProduct(request.productId());
 
-        if(product.getQuantity() <= 0) throw new ApplicationException(ProductErrorCode.PRODUCT_QUANTITY_BAD_REQUEST);
-        product.deductQuantity();
+        if(product.getQuantity() <= 0) {
+            throw new ApplicationException(ProductErrorCode.PRODUCT_QUANTITY_BAD_REQUEST);
+        }
+        productService.decreaseQuantity(product.getId());
+
+        Order order = Order.create(product, userProxy);
+        orderRepository.save(order);
+    }
+
+    @Transactional
+    public void createOrderWithLock(CreateOrderRequest request){
+        User userProxy = userService.getUserProxy(request.userId());
+        Product product = productService.findByIdWithPessimisticLock(request.productId());
+
+        if(product.getQuantity() <= 0) {
+            throw new ApplicationException(ProductErrorCode.PRODUCT_QUANTITY_BAD_REQUEST);
+        }
+        productService.decreaseQuantity(product.getId());
 
         Order order = Order.create(product, userProxy);
         orderRepository.save(order);
